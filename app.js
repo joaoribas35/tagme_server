@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-// import Routes from "../server/api/routes";
+import Routes from "./api/routes";
 
 async function start() {
   require("dotenv").config();
@@ -14,13 +14,13 @@ async function start() {
 
   mongoose
     .connect(process.env.DATABASE)
-    .then(() => console.log("DB connected"))
-    .catch((error) => console.log("DB connection failed:", error));
+    .then(() => console.log("Tagme database connected"))
+    .catch((error) => console.log("Tagme database connection failed:", error));
 
   app.use(morgan("dev"));
   app.use(express.json());
 
-  // Routes(app);
+  Routes(app);
 
   app.listen(PORT, () => {
     console.log(`Server is running at http://127.0.0.1:${PORT}`);
