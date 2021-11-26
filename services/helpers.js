@@ -7,9 +7,9 @@ export const ingredientsToArray = (ingredients) => {
   return array;
 };
 
-export const directionsToArray = (ingredients) => {
+export const directionsToArray = (directions) => {
   let array = [];
-  let split = ingredients.split("&");
+  let split = directions.split("&");
   for (let i of split) {
     array.push(i);
   }

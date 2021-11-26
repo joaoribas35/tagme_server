@@ -28,3 +28,10 @@ export const list = async (req, res) => {
     .exec();
   return res.status(200).send(recipes);
 };
+
+export const retrieve = async (req, res) => {
+  const recipe = await Recipe.findById(req.params.id)
+    .select("-thumbnail")
+    .exec();
+  return res.status(200).send(recipe);
+};
