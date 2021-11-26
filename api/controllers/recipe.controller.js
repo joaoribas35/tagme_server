@@ -10,8 +10,8 @@ export const create = async (req, res) => {
   recipe.prepTime = prepTime;
   recipe.ingredients = ingredientsToArray(ingredients);
   recipe.directions = directionsToArray(directions);
-
-  if (req.file) recipe.image = req.file.path;
+  recipe.image = req.files["image"][0].path;
+  recipe.thumbnail = req.files["thumbnail"][0].path;
 
   try {
     await recipe.save();
@@ -20,4 +20,11 @@ export const create = async (req, res) => {
     console.log("create recipe error", error);
     res.status(400).send(error);
   }
+};
+
+export const list = async (req, res) => {
+  const recipes = await Recipe.find({})
+    .select("title description thumbnail")
+    .exec();
+  return res.status(200).send(recipes);
 };

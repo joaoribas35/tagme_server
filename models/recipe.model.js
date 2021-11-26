@@ -28,6 +28,10 @@ const recipeSchema = new Schema(
       type: String,
       required: "image is required",
     },
+    thumbnail: {
+      type: String,
+      required: "thumbnail is required",
+    },
   },
   { timestamps: true }
 );

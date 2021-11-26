@@ -20,4 +20,13 @@ export const imageUpload = multer({
   limits: {
     fieldSize: 1024 * 1024 * 2,
   },
-});
+}).fields([
+  {
+    name: "image",
+    maxCount: 1,
+  },
+  {
+    name: "thumbnail",
+    maxCount: 1,
+  },
+]);
