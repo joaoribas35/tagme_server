@@ -1,4 +1,4 @@
-import User from "../../models/User.model";
+import User from "../../models/user.model";
 
 export const userRegisterValidator = async (req, res, next) => {
   const { name, email, password } = req.body;

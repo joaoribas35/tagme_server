@@ -19,6 +19,7 @@ async function start() {
 
   app.use(morgan("dev"));
   app.use(express.json());
+  app.use("/api/images", express.static("images"));
 
   Routes(app);
 
