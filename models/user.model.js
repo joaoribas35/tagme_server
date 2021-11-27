@@ -5,15 +5,10 @@ const { Schema } = moongose;
 
 const userSchema = new Schema(
   {
-    name: {
+    username: {
       type: String,
       trim: true,
-      required: "name is required",
-    },
-    email: {
-      type: String,
-      trim: true,
-      required: "email is required",
+      required: "username is required",
       unique: true,
     },
     password: {

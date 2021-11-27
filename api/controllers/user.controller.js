@@ -2,12 +2,13 @@ import User from "../../models/user.model";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
+  console.log("req", req.body);
   const user = new User(req.body);
-  const { email, name } = req.body;
+  const { username } = req.body;
 
   try {
     await user.save();
-    res.status(201).send({ name: name, email: email });
+    res.status(201).send({ username });
   } catch (err) {
     console.log("user register error", err);
     res.status(400).send(err);
@@ -15,12 +16,13 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ email }).exec();
+    const user = await User.findOne({ username }).exec();
 
-    if (!user) res.status(400).send({ error: "O email informado é invalido." });
+    if (!user)
+      return res.status(400).send({ error: "O usuário informado é invalido." });
 
     user.comparePassword(password, (err, match) => {
       if (!match || err) {
