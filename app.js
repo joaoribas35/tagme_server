@@ -2,20 +2,21 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import Routes from "./api/routes";
+import { databaseConfig } from "./config/database";
 
 async function start() {
   require("dotenv").config();
   const morgan = require("morgan");
 
-  const PORT = process.env.PORT || 8000;
+  const PORT = process.env.PORT || databaseConfig.PORT;
   const app = express();
 
   app.use(cors());
 
   mongoose
-    .connect(process.env.DATABASE)
-    .then(() => console.log("Tagme database connected"))
-    .catch((error) => console.log("Tagme database connection failed:", error));
+    .connect(process.env.DATABASE || databaseConfig.connectionString)
+    .then(() => console.log("Database connected"))
+    .catch((error) => console.log("Database connection failed:", error));
 
   app.use(morgan("dev"));
   app.use(express.json());
